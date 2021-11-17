@@ -1,15 +1,15 @@
 from datetime import datetime
-from messager import tweet_discord,following_discord
+# from messager import tweet_discord,following_discord
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 import os
-
+import schedule
 '''
 Parameter : target_acc, Is the account username which follow someone.
             following, Is the new following added into list.
@@ -109,12 +109,12 @@ def scrap_tweet(driver,target_acc):
     return message_LIST
 
 def main(username,password,target_acc,filename):
-    s = Service(ChromeDriverManager().install())
+    # s = Service(ChromeDriverManager().install())
     ua = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument(ua)
-    driver = webdriver.Chrome(service=s,options=chrome_options)
+    driver = webdriver.Chrome(executable_path='chromedriver.exe',options=chrome_options)
     # driver.maximize_window()
     actions = ActionChains(driver)
     driver.get('https://twitter.com/i/flow/login')
@@ -160,7 +160,10 @@ def main(username,password,target_acc,filename):
             pass
     driver.close()
     driver.quit()
-if __name__ == '__main__':
-    main(username,password,target_acc='',filename='')
+# if __name__ == '__main__':
+#     main(username,password,target_acc='',filename='')
+
+# After every 5 to 10mins in between run work()
+schedule.every(5).to(7).minutes.do(main(username,password,target_acc='',filename=''))
 
 
