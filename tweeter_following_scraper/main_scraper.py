@@ -1,8 +1,8 @@
 from datetime import datetime
 from messager import tweet_discord,following_discord
 from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
@@ -109,12 +109,14 @@ def scrap_tweet(driver,target_acc):
     return message_LIST
 
 def main(username,password,target_acc,filename):
-    # s = Service(ChromeDriverManager().install())
+    s = Service(ChromeDriverManager().install())
     ua = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
     chrome_options = Options()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument("--headless")
-    chrome_options.add_argument(ua)
-    driver = webdriver.Chrome(executable_path='chromedriver.exe',options=chrome_options)
+    # chrome_options.add_argument(ua)
+    driver = webdriver.Chrome(executable_path=s,options=chrome_options)
     # driver.maximize_window()
     actions = ActionChains(driver)
     driver.get('https://twitter.com/i/flow/login')
@@ -151,10 +153,10 @@ def main(username,password,target_acc,filename):
         #     pass
         try:
             users = loop_used(driver,target_acc)
-            if users != False:
-                following_discord(users,target_acc)
-            else:
-                print('EMAIL NOT SENT--- NO NEW USERS FOUND')
+            # if users != False:
+            #     following_discord(users,target_acc)
+            # else:
+            #     print('EMAIL NOT SENT--- NO NEW USERS FOUND')
         except:
             print(target_acc + ' not scrapped for followings')
             pass
