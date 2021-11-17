@@ -1,5 +1,5 @@
 from datetime import datetime
-# from messager import tweet_discord,following_discord
+from messager import tweet_discord,following_discord
 from selenium import webdriver
 # from selenium.webdriver.chrome.service import Service
 # from webdriver_manager.chrome import ChromeDriverManager
@@ -151,10 +151,10 @@ def main(username,password,target_acc,filename):
         #     pass
         try:
             users = loop_used(driver,target_acc)
-            # if users != False:
-            #     following_discord(users,target_acc)
-            # else:
-            #     print('EMAIL NOT SENT--- NO NEW USERS FOUND')
+            if users != False:
+                following_discord(users,target_acc)
+            else:
+                print('EMAIL NOT SENT--- NO NEW USERS FOUND')
         except:
             print(target_acc + ' not scrapped for followings')
             pass
