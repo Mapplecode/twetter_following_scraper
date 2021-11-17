@@ -14,18 +14,18 @@ def tweet_discord(message,target_acc):
 
     date_now = str(datetime.now().date())
     time_now = str(datetime.now().time())
-    content = 'SCRAP DATETIME'
-    content += '\n'
-    content +='DATE - '+date_now+'\n'
-    content += 'TIME - ' + time_now + '\n'
-    content +='##################################'+ '\n'
-    content += '##################################'+ '\n'
-    content += '\n'
+    content = ''
+    # content += '\n'
+    # content +='DATE - '+date_now+'\n'
+    # content += 'TIME - ' + time_now + '\n'
+    # content +='##################################'+ '\n'
+    # content += '##################################'+ '\n'
+    # content += '\n'
     content += str(target_acc)+' Tweeted :\n'+('\n'.join(message))+'\n'
     content += '\n'
-    content += '=============================='+ '\n'
-    content += '=============================='+ '\n'
-    content += '\n'
+    # content += '=============================='+ '\n'
+    # content += '=============================='+ '\n'
+    # content += '\n'
     # res = requests.post(url,data=json.dumps(payload))
     url = 'https://discord.com/api/webhooks/910235427745697832/SuK1Ga8nIenNULRG2TnX5yswjLqUz7GVMSmGdtZUKyY4WvoE3ZK1k6EUUXiRRFioLiQy'
     payload = {'user name': 'user_tweets',
@@ -41,15 +41,15 @@ def following_discord(following,target_acc):
     date_now = str(datetime.now().date())
     time_now = str(datetime.now().time())
     content = ''
-    content +='DATE - '+date_now+'\n'
-    content += 'TIME - ' + time_now + '\n'
-    content +='##################################'+ '\n'
-    content += '##################################'+ '\n'
+    # content +='DATE - '+date_now+'\n'
+    # content += 'TIME - ' + time_now + '\n'
+    # content +='##################################'+ '\n'
+    # content += '##################################'+ '\n'
     content += '\n'
     content += str(target_acc)+' Started Following :\n'+(following)+'\n'
-    content += '\n'
-    content += '=============================='+ '\n'
-    content += '=============================='+ '\n'
+    # content += '\n'
+    # content += '=============================='+ '\n'
+    # content += '=============================='+ '\n'
     content += '\n'
     # res = requests.post(url,data=json.dumps(payload))
     url = "https://discord.com/api/webhooks/910235427745697832/SuK1Ga8nIenNULRG2TnX5yswjLqUz7GVMSmGdtZUKyY4WvoE3ZK1k6EUUXiRRFioLiQy"

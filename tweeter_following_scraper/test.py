@@ -42,7 +42,7 @@ def loop_used(driver,target_acc):
         USER_LIST.append(user)
 
     user_in_file =[]
-    file_name = str(target_acc) + '_file.txt'
+    file_name = 'updated_files/'+str(target_acc) + '_file.txt'
     try:
         if os.path.isfile(file_name):
             user_in_file = open(file_name,'r').read()
@@ -76,7 +76,7 @@ def scrap_tweet(driver,target_acc):
     tweet_list = driver.find_elements(By.TAG_NAME, 'article')
     message_LIST = []
     user_in_file = []
-    file_name = str(target_acc) + '_tweets_file.txt'
+    file_name = 'updated_files/'+str(target_acc) + '_tweets_file.txt'
     new_file = open(str(file_name), 'w')
     try:
         if os.path.isfile(file_name):
@@ -131,25 +131,29 @@ def main(username,password,target_acc,filename):
     except:
         pass
     time.sleep(5)
-    target_account = ['@ak_xxiv','@ZssBecker', '@elliotrades', '@ryandcrypto', '@danielesesta', '@cryptoAGC',
-                      '@ANordicRaven','theosyris13']
+    target_user_file = open('target_users.txt','r').read()
+    target_account = target_user_file.split('\n')
+    # target_account = ['@ak_xxiv','@ZssBecker', '@elliotrades', '@ryandcrypto', '@danielesesta', '@cryptoAGC',
+    #                   '@ANordicRaven','theosyris13','theocapital']
     for target_acc in target_account:
-        try:
-            messages = scrap_tweet(driver, target_acc)
-            print(messages)
-            if messages != False:
-                tweet_discord(messages, target_acc)
-            else:
-                print('EMAIL NOT SENT--- NO NEW TWEETS FOUND')
-        except:
-            print(target_acc+' not scrapped for tweets')
-            pass
+        target_acc = target_acc.replace(' ','')
+        target_acc = target_acc.replace('@', '')
+        # try:
+        #     messages = scrap_tweet(driver, target_acc)
+        #     print(messages)
+        #     if messages != False:
+        #         tweet_discord(messages, target_acc)
+        #     else:
+        #         print('EMAIL NOT SENT--- NO NEW TWEETS FOUND')
+        # except:
+        #     print(target_acc+' not scrapped for tweets')
+        #     pass
         try:
             users = loop_used(driver,target_acc)
-            if users != False:
-                following_discord(users,target_acc)
-            else:
-                print('EMAIL NOT SENT--- NO NEW USERS FOUND')
+            # if users != False:
+            #     following_discord(users,target_acc)
+            # else:
+            #     print('EMAIL NOT SENT--- NO NEW USERS FOUND')
         except:
             print(target_acc + ' not scrapped for followings')
             pass
