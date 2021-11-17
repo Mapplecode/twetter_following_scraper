@@ -36,6 +36,7 @@ def loop_used(driver,target_acc):
         text_list = str(ul.text).split('\n')
         user = ""
         for u_name in text_list[:2]:
+            print(u_name)
             if '@' in u_name:
                 user =  u_name
                 # print(user)
@@ -111,10 +112,10 @@ def main(username,password,target_acc,filename):
     s = Service(ChromeDriverManager().install())
     ua = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument(ua)
     driver = webdriver.Chrome(service=s,options=chrome_options)
-    driver.maximize_window()
+    # driver.maximize_window()
     actions = ActionChains(driver)
     driver.get('https://twitter.com/i/flow/login')
     time.sleep(5)
